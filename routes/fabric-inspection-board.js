@@ -82,7 +82,7 @@ router.get("/completed/:id", checkAuth, async (req, res) => {
   res.redirect("/fabric-inspection-board");
 });
 
-router.get("/edit/:id", async (req, res) => {
+router.get("/edit/:id", checkAuth, async (req, res) => {
   let id = req.params.id;
   let currentCard = await FabricInspectionBoardInProgress.findOne(
     {
@@ -95,7 +95,7 @@ router.get("/edit/:id", async (req, res) => {
   });
 });
 
-router.post("/edit/:id", async (req, res) => {
+router.post("/edit/:id", checkAuth, async (req, res) => {
   let id = req.params.id;
   let deletedCard = await FabricInspectionBoardInProgress.findOneAndDelete({
     id: id,
