@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PE Empro || cutting Inspection Department Issuing Card</title>
+    <%- include('./partials/head.ejs') %>
+  </head>
+  <body>
+    <div class="container">
+      <header class="prod__header">
+        <div class="navbrand">
+          <a href="/">
+            <img src="/images/logo.png" alt="Logo" />
+          </a>
+        </div>
+        <div class="navbar">
+          <a href="/" class="nav-link">Home</a>
+        </div>
+      </header>
+      <main class="prod__main">
+        <form class="prod__form" action="/cutting-issuing-card" method="POST">
+          <h2>Cutting Issuing Card</h2>
+          <div class="formgroup">
+            <label for="fabricName">Fabric Name: </label>
+            <input type="text" name="fabricName" id="fabricName" />
+          </div>
+          <div class="formgroup">
+            <label for="fabricContent">Fabric Content: </label>
+            <input type="text" name="fabricContent" id="fabricContent" />
+          </div>
+          <div class="formgroup">
+            <label for="fabricColour">Fabric Colour: </label>
+            <input type="text" name="fabricColour" id="fabricColour" />
+          </div>
+          <div class="formgroup">
+            <label for="dateOfCutting">Date Of Cutting</label>
+            <input type="Date" name="dateOfCutting" id="date" />
+          </div>
+          <div class="formgroup">
+            <label for="stylenumber">Style Number: </label>
+            <input type="number" name="stylenumber" id="stylenumber" min="0" />
+          </div>
+          <div class="formgroup">
+            <label for="quantity">Quantity (in meters)</label>
+            <input type="text" name="quantity" id="quantity" />
+          </div>
+          <div class="formgroup">
+            <label for="average">Average </label>
+            <input type="text" name="average" id="average" />
+          </div>
+          <div id="extra-fields-div" class="formgroup"></div>
+          <button id="customFields">Add More Fields +</button>
+          <input type="submit" value="Submit" />
+        </form>
+      </main>
+    </div>
+    <script src="/js/app.js"></script>
+  </body>
+</html>

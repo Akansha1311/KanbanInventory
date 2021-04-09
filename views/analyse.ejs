@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PE EMPRO | Analyse Products</title>
+    <%- include("./partials/head.ejs") %>
+  </head>
+  <body>
+    <div class="container">
+      <header class="board__header">
+        <h2>Performance</h2>
+        <a href="/" class="nav-link">Home</a>
+      </header>
+      <div class="filter__container">
+        <form class="prod__form filter__form" style="margin: 30px 0 30px 0" action="/analyze/filter" method="POST">
+          <h2>Filters</h2>
+
+          <div class="formgroup">
+            <label for="fabricName">Fabric Name: </label>
+            <input type="text" name="fabricName" id="fabricName">
+          </div>
+          <div class="formgroup">
+            <label for="fabricContent">Fabric Content: </label>
+            <input type="text" name="fabricContent" id="fabricContent">
+          </div>
+          <div class="formgroup">
+            <label for="dateOfReceiving">Date of Recieving: </label>
+            <input type="date" name="dateOfReceiving" id="dateOfReceiving">
+          </div>
+          <div class="formgroup">
+            <label for="supplier">Supplier Name: </label>
+            <input type="text" name="supplier" id="supplier">
+          </div>
+          <input type="submit" value="Apply">
+          <a href="/analyze">Clear Filters</a>
+        </form>
+      </div>
+      <main class="available__main analyze__main">
+        <div class="dept">
+          <h3>Fabric Sourcing Department</h3>
+          <ul>
+            <% for(let i=0; i<data.length; i++) {%> 
+              <% if(data[i].dept != 'fabric') {%> 
+                <% if(data[i].dept != 'cutting') {%> 
+                  <li class="card__li">
+                    <% var fabricTimeDiff = ''; %> 
+                    <% for(let key in data[i]) {%> 
+                      <% if(key !== 'id') {%> 
+                        <% if(key !== 'createdAt') {%>
+                          <% if(key == 'dateOfReceiving') {%> 
+                            <% humanTime = moment(data[i][key]).format("ll") %> 
+                            <div><b><%=key %>:</b> <%=humanTime%></div>
+                          <%} else if(key == 'dateOfInspection') {%>
+                            <% humanReceivingTime = moment(data[i][key]).format('ll') %>
+                            <div><b><%=key %>:</b> <%=humanReceivingTime%></div>
+                          <%} else {%>
+                          <div><b><%=key %>:</b>  <%=data[i][key] %>  </div>
+                          <% } %> 
+                        <% } %> 
+                      <% } %>
+                      <% fabricTimeDiff =  moment(data[i]["published"], "llll").diff(moment(data[i]['startedAt'], "llll"), 'm')%> 
+                    <% } %>
+                          <div class="timeDiff"><b>Lead Time</b><%=fabricTimeDiff%> mins</div>
+                          <div class="card__completed">
+                            <a href="/analyze/delete/<%=data[i].id%>">Delete</a>
+                          </div>
+                  </li>
+                <% } %> 
+              <% } %> 
+            <%}%>
+          </ul>
+        </div>
+        <div class="dept">
+          <h3>Fabric Department</h3>
+          <ul>
+            <% for(let i=0; i<data.length; i++) {%> 
+              <% if(data[i].dept == 'fabric') {%> 
+                <li class="card__li">
+                  <% var fabricTimeDiff = ''; %> 
+                  <% for(let key in data[i]) {%> 
+                    <% if(key !== 'id') {%> 
+                      <% if(key !== 'createdAt') {%>
+                        <div><b><%=key %>:</b>  <%=data[i][key] %>  </div>
+                      <% } %> 
+                    <% } %>
+                    <% fabricTimeDiff =  moment(data[i]["published"], "llll").diff(moment(data[i]['startedAt'], "llll"), 'm')%> 
+                  <% } %>
+                        <div class="timeDiff"><b>Lead Time</b><%=fabricTimeDiff%> mins</div>
+                        <div class="card__completed">
+                          <a href="/analyze/delete/<%=data[i].id%>">Delete</a>
+                        </div>
+                </li>
+              <% } %> 
+            <%}%>
+          </ul>
+        </div>
+        <div class="dept">
+          <h3>Cutting Department</h3>
+          <ul>
+            <% for(let i=0; i<data.length; i++) {%> 
+              <% if(data[i].dept == 'cutting') {%> 
+                <li class="card__li">
+                  <% var fabricTimeDiff = ''; %> 
+                  <% for(let key in data[i]) {%> 
+                    <% if(key !== 'id') {%> 
+                      <% if(key !== 'createdAt') {%>
+                        <div><b><%=key %>:</b>  <%=data[i][key] %>  </div>
+                      <% } %> 
+                    <% } %>
+                    <% fabricTimeDiff =  moment(data[i]["published"], "llll").diff(moment(data[i]['startedAt'], "llll"), 'm')%> 
+                  <% } %>
+                        <div class="timeDiff"><b>Lead Time</b><%=fabricTimeDiff%> mins</div>
+                        <div class="card__completed">
+                          <a href="/analyze/delete/<%=data[i].id%>">Delete</a>
+                        </div>
+                </li>
+              <% } %> 
+            <%}%>
+          </ul>
+        </div>
+      </main>
+    </div>
+
+  </body>
+</html>

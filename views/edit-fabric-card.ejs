@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Fabric Card</title>
+    <%- include("./partials/head.ejs") %>
+  </head>
+  <body>
+    <div class="container">
+      <header class="board__header">
+        <h2>Edit Fabric Inspection Details</h2>
+        <a href="/" class="nav-link">Home</a>
+      </header>
+      <main class="">
+        <form
+          style="margin-top: 50px"
+          action="/fabric-inspection-board/edit/<%=data.id%>"
+          method="POST"
+          class="prod__form"
+        >
+          <% for(let key in data) {%> <% if(key != 'afterInspection') {%>
+          <div class="formgroup">
+            <label for="<%=key%>"><b><%=key %>:</b> </label>
+            <input
+              type="text"
+              name="<%=key%>"
+              value="<%=data[key]%> "
+              readonly
+            />
+          </div>
+          <%}else {%>
+          <div class="formgroup">
+            <label for="afterInspection">After Inspection: </label>
+            <select name="afterInspection" id="afterInspection">
+              <option value="OK Pass">Ok Pass</option>
+              <option value="Pass with wastage">Pass with wastage</option>
+              <option value="Rejected">Rejected</option>
+              <option value="Approval Pending">Approval Pending</option>
+            </select>
+          </div>
+          <%}%> <%}%>
+          <div id="extra-fields-div" class="formgroup"></div>
+          <button id="customFields" type="button">Add More Fields +</button>
+          <input type="submit" value="Update" />
+          <a href="/fabric-inspection-board">cancel</a>
+        </form>
+      </main>
+    </div>
+    <script>
+      let afterInspection = "<%=data.afterInspection%>";
+      let options = document.querySelectorAll("option");
+      options.forEach((e) => {
+        if (e.value == afterInspection.trim()) {
+          e.selected = true;
+        }
+      });
+    </script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
