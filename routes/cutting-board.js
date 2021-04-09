@@ -76,7 +76,7 @@ router.get("/edit/:id", checkAuth, async (req, res) => {
     {
       id: id,
     },
-    "-id -_v"
+    "-_id -__v"
   ).lean();
   res.render(path.join(__dirname, "../", "/views/edit-cutting-card.ejs"), {
     data: currentCard,
