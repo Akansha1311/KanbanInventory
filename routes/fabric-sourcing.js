@@ -90,6 +90,7 @@ router.post("/startTask", checkAuth, async (req, res) => {
   delete newAvailableCard["__v"];
   delete newFabricInspectionCard["_id"];
   delete newFabricInspectionCard["__v"];
+  newFabricInspectionCard.id = shortid.generate();
   newAvailableCard["length"] = deletedCard["length"] - formLength;
   newFabricInspectionCard["length"] = Number(formLength);
   if (newAvailableCard["length"] > 0) {
