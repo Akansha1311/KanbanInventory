@@ -32,7 +32,7 @@ router.get("/", async (req, res) => {
   );
 });
 
-router.post("/startTask", async (req, res) => {
+router.post("/startTask", checkAuth, async (req, res) => {
   let id = req.body.id;
   let formLength = req.body.length;
   let dateOfCutting = req.body.dateOfCutting;
