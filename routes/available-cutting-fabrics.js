@@ -36,7 +36,6 @@ router.post("/startTask", checkAuth, async (req, res) => {
   let id = req.body.id;
   let formLength = req.body.length;
   let dateOfCutting = req.body.dateOfCutting;
-  let stylenumber = req.body.stylenumber;
   let average = req.body.average;
   let deletedCard = await AvailableCuttingFabrics.findOneAndDelete({
     id,
