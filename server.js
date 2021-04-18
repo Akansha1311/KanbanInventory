@@ -78,7 +78,6 @@ app.use(passport.session());
 app.use("/", require("./routes/index"));
 // app.use("/fabric-inspection", require("./routes/fabric-inspection-board.js"));
 app.use("/fabric-sourcing", require("./routes/fabric-sourcing"));
-app.use("/cutting-issuing-card", require("./routes/cutting-issuing-card"));
 app.use(
   "/fabric-inspection-board",
   require("./routes/fabric-inspection-board")
