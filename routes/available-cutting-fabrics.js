@@ -58,9 +58,6 @@ router.post("/startTask", checkAuth, async (req, res) => {
   newCuttingCard.id = shortid.generate();
   newAvailableCard["length"] = deletedCard["length"] - formLength;
   newCuttingCard["length"] = Number(formLength);
-  if (stylenumber) {
-    newCuttingCard["stylenumber"] = stylenumber;
-  }
   if (average) {
     newCuttingCard["average"] = average;
   }
