@@ -27,6 +27,10 @@ let CuttingCardsSchema = new Schema(
     requireddate: {
       type: String,
     },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
     quantity: {
       type: String,
     },
